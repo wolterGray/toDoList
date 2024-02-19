@@ -2,15 +2,15 @@ import React from "react";
 
 import TaskItem from "../TaskItem/TaskItem";
 
-function TasksSection({tasksData}) {
+function TasksSection({tasksData, removeTask}) {
   const [activeOption, setActiveOption] = React.useState("All");
   const [controlsValue] = React.useState(["All", "Active", "Completed"]);
-
+  
   return (
     tasksData.length && (
       <div className="bg-customSecBg mt-6">
         {tasksData.map((task) => (
-          <TaskItem key={task}>{task}</TaskItem>
+          <TaskItem id={task.id} removeTask={removeTask}  key={task.id}>{task.name}</TaskItem>
         ))}
         <div className="h-12 p-5  flex justify-between items-center">
           <div>

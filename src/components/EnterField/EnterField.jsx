@@ -1,13 +1,15 @@
 import React from "react";
 import CheckBox from "../checkBox/CheckBox";
 import {FaPlus} from "react-icons/fa6";
+import {v4} from "uuid";
 
-function EnterField({setter}) {
+function EnterField({setter, id}) {
   const [checkStatus, setCheckStatus] = React.useState(false);
   const [inputValue, setInputValue] = React.useState("");
 
   const addTask = () => {
-    setter((prev) => [...prev, inputValue]);
+    setter((prev) => [...prev, {id: v4(), name: inputValue}]);
+    setInputValue("");
   };
   return (
     <div className="relative h-16 bg-customSecBg">
@@ -20,7 +22,10 @@ function EnterField({setter}) {
         type="text"
       />
       {inputValue && (
-        <FaPlus onClick={addTask} className="absolute top-1/2 right-2 -translate-y-1/2 text-[1.5em] h-full  mr-5 cursor-pointer  hover:text-customCl" />
+        <FaPlus
+          onClick={addTask}
+          className="absolute top-1/2 right-2 -translate-y-1/2 text-[1.5em] h-full  mr-5 cursor-pointer  hover:text-customCl"
+        />
       )}
     </div>
   );
