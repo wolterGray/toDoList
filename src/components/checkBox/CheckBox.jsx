@@ -1,9 +1,9 @@
 import React from "react";
 
-function CheckBox({checkStatus, setCheckStatus}) {
+function CheckBox({checkStatus}) {
+  
   return (
     <span
-      onClick={() => setCheckStatus(!checkStatus)}
       className={`checkbox ${checkStatus ? "checked" : ""}`}
     />
   );

@@ -8,17 +8,32 @@ import TasksSection from "./components/TasksSection/TasksSection";
 
 function App() {
   const [tasksData, setTasksData] = React.useState([]);
+
   function removeTask(id) {
     const newTaskArr = tasksData.filter((t) => t.id !== id);
     setTasksData(newTaskArr);
   }
+  function setCompleteStatus(id) {
+    const newTaskArr = tasksData.map((e) =>
+      e.id === id ? {...e, complete: !e.complete} : e
+    );
+    setTasksData(newTaskArr);
+    
+  }
+  
+  console.log(tasksData);
+
   return (
     <div className="relative select-none">
       <img src="/bg-desktop-dark.jpg" alt="background banner" />
       <div className="h-3/5 w-5/12 mx-auto absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
         <Header />
         <EnterField setter={setTasksData} />
-        <TasksSection removeTask={removeTask} tasksData={tasksData} />
+        <TasksSection
+          removeTask={removeTask}
+          setCompleteStatus={setCompleteStatus}
+          tasksData={tasksData}
+        />
       </div>
     </div>
   );
