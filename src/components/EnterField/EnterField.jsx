@@ -8,8 +8,12 @@ function EnterField({setter, id}) {
   const [inputValue, setInputValue] = React.useState("");
 
   const addTask = () => {
-    setter((prev) => [...prev, {id: v4(), complete: false, name: inputValue}]);
+    setter((prev) => [
+      ...prev,
+      {id: v4(), complete: checkStatus, name: inputValue},
+    ]);
     setInputValue("");
+    setCheckStatus(false);
   };
   const onPushEnter = (e) => {
     if (e.key === "Enter" && inputValue.trim().length) {
@@ -18,10 +22,13 @@ function EnterField({setter, id}) {
   };
 
   return (
-    <div className="relative h-16 bg-customSecBg">
-      <CheckBox checkStatus={checkStatus} setCheckStatus={setCheckStatus} />
+    <div className="relative h-16 flex items-center bg-customSecBg">
+      <CheckBox
+        checkStatus={checkStatus}
+        onClick={() => setCheckStatus(!checkStatus)}
+      />
       <input
-        className=" bg-[transparent] w-[80%] placeholder:opacity-[0.7]  mr-0-auto h-full rounded-md  text-[1.4em] outline-none  pl-16 text-customCl"
+        className=" bg-[transparent]  w-full h-full ml-5 placeholder:opacity-[0.7]  mr-0-auto  rounded-md outline-none text-customCl"
         placeholder="Create a new todo..."
         onKeyDown={(e) => onPushEnter(e)}
         onChange={(el) => setInputValue(el.target.value)}
