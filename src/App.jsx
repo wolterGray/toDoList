@@ -8,6 +8,7 @@ import TasksSection from "./components/TasksSection/TasksSection";
 
 function App() {
   const [tasksData, setTasksData] = React.useState([]);
+ 
 
   function removeTask(id) {
     const newTaskArr = tasksData.filter((t) => t.id !== id);
@@ -20,8 +21,9 @@ function App() {
     setTasksData(newTaskArr);
     
   }
-  
-  console.log(tasksData);
+  function clearAllCompleted(){
+    setTasksData(tasksData.filter((e) => e.complete === false))
+  }
 
   return (
     <div className="relative select-none">
@@ -32,6 +34,7 @@ function App() {
         <TasksSection
           removeTask={removeTask}
           setCompleteStatus={setCompleteStatus}
+          clearAllCompleted={clearAllCompleted}
           tasksData={tasksData}
         />
       </div>
