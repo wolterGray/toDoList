@@ -22,64 +22,83 @@ function TasksSection({
   }
 
   return (
-    <div
-      className={`${
-        darkMode ? "bg-secondaryBgD" : "bg-secondaryBgL"
-      } mt-6 rounded-md shadow-xl shadow-[#00000049]`}>
-      {filterTasks().length > 0 ? (
-        filterTasks().map((task) => (
-          <TaskItem
-            darkMode={darkMode}
-            setCompleteStatus={setCompleteStatus}
-            id={task.id}
-            complete={task.complete}
-            removeTask={removeTask}
-            key={task.id}>
-            {task.name}
-          </TaskItem>
-        ))
-      ) : (
-        <p className="h-16  font-[500] flex items-center justify-center border-b-[1px] border-customBorder text-secondaryTextColor ">
-          {activeOption !== "All"
-            ? ` No "${activeOption}" tasks.`
-            : "No tasks yet..."}
-        </p>
-      )}
-      <div className="h-12 p-5 flex justify-between items-center text-secondaryTextColor text-[.8em] font-bold">
-        <div>
-          <p>
-            {tasksData.filter((e) => e.complete === false).length} items left
+    <>
+      <div
+        className={`${
+          darkMode ? "bg-secondaryBgD" : "bg-secondaryBgL"
+        } sm:mt-6 mt-4  rounded-md shadow-xl  shadow-[#00000049]`}>
+        {filterTasks().length > 0 ? (
+          filterTasks().map((task) => (
+            <TaskItem
+              darkMode={darkMode}
+              setCompleteStatus={setCompleteStatus}
+              id={task.id}
+              complete={task.complete}
+              removeTask={removeTask}
+              key={task.id}>
+              {task.name}
+            </TaskItem>
+          ))
+        ) : (
+          <p className="h-16  font-[500] flex items-center justify-center border-b-[1px] border-customBorder text-secondaryTextColor ">
+            {activeOption !== "All"
+              ? ` No "${activeOption}" tasks.`
+              : "No tasks yet..."}
           </p>
-        </div>
-        <div className="flex gap-5">
-          {controlsValue.map((element) => (
+        )}
+        <div className="h-12 p-5 flex justify-between items-center text-secondaryTextColor text-[.8em] font-bold">
+          <div>
+            <p>
+              {tasksData.filter((e) => e.complete === false).length} items left
+            </p>
+          </div>
+          <div className=" hidden sm:flex gap-5">
+            {controlsValue.map((element) => (
+              <button
+                key={element}
+                onClick={() => setActiveOption(element)}
+                className={`${
+                  activeOption === element
+                    ? "text-blueColor"
+                    : darkMode
+                    ? "hover:text-textHoverD"
+                    : "hover:text-textHoverL"
+                }  `}>
+                {element}
+              </button>
+            ))}
+          </div>
+          <div>
             <button
-              key={element}
-              onClick={() => setActiveOption(element)}
+              onClick={clearAllCompleted}
               className={`${
-                activeOption === element
-                  ? "text-blueColor"
-                  : darkMode
-                  ? "hover:text-textHoverD"
-                  : "hover:text-textHoverL"
-              }  `}>
-              {element}
+                darkMode ? "hover:text-textHoverD" : "hover:text-textHoverL"
+              } mr-3 `}>
+              Clear Completed
             </button>
-          ))}
-        </div>
-        <div>
-          <button
-            onClick={clearAllCompleted}
-            className={`${
-              darkMode
-                ? "hover:text-textHoverD"
-                : "hover:text-textHoverL"
-            } mr-3 `}>
-            Clear Completed
-          </button>
+          </div>
         </div>
       </div>
-    </div>
+      <div
+        className={`${
+          darkMode ? "bg-secondaryBgD" : "bg-secondaryBgL"
+        } h-16 flex justify-center mt-4 sm:hidden gap-5 shadow-xl shadow-[#00000049] rounded-md text-secondaryTextColor`}>
+        {controlsValue.map((element) => (
+          <button
+            key={element}
+            onClick={() => setActiveOption(element)}
+            className={`${
+              activeOption === element
+                ? "text-blueColor"
+                : darkMode
+                ? "hover:text-textHoverD"
+                : "hover:text-textHoverL"
+            }  `}>
+            {element}
+          </button>
+        ))}
+      </div>
+    </>
   );
 }
 

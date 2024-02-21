@@ -9,6 +9,7 @@ import TasksSection from "./components/TasksSection/TasksSection";
 function App() {
   const [tasksData, setTasksData] = React.useState([]);
   const [darkMode, setDarkMode] = React.useState(false);
+
   function removeTask(id) {
     const newTaskArr = tasksData.filter((t) => t.id !== id);
     setTasksData(newTaskArr);
@@ -36,7 +37,7 @@ function App() {
         alt="background banner"
       />
 
-      <div className="container md:max-w-xl sm:max-w-lg mx-auto pt-20 relative z-auto">
+      <div className="container md:max-w-xl sm:max-w-lg max-w-[90%] mx-auto pt-20 relative z-auto">
         <Header darkModeToggle={darkModeToggle} darkMode={darkMode} />
         <EnterField darkMode={darkMode} setter={setTasksData} />
         {tasksData && (
