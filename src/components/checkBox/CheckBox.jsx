@@ -1,10 +1,14 @@
 import React from "react";
 
-function CheckBox({checkStatus, onClick}) {
+function CheckBox({checkStatus, darkMode, onClick}) {
   return (
     <span
       onClick={onClick}
-      className={`checkbox ${checkStatus ? "checked" : ""}`}
+      className={`checkbox ${
+        darkMode
+          ? !checkStatus && "hover:after:bg-secondaryBgD"
+          : !checkStatus && "hover:after:bg-secondaryBgL"
+      }  ${checkStatus ? "checked" : ""}`}
     />
   );
 }

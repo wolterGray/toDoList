@@ -3,7 +3,7 @@ import CheckBox from "../checkBox/CheckBox";
 import {FaPlus} from "react-icons/fa6";
 import {v4} from "uuid";
 
-function EnterField({setter, id}) {
+function EnterField({setter, darkMode}) {
   const [checkStatus, setCheckStatus] = React.useState(false);
   const [inputValue, setInputValue] = React.useState("");
 
@@ -22,8 +22,12 @@ function EnterField({setter, id}) {
   };
 
   return (
-    <div className="relative h-16 flex items-center bg-customSecBg">
+    <div
+      className={`${
+        darkMode ? "bg-secondaryBgD" : "bg-secondaryBgL"
+      } relative h-16 flex items-center rounded-md shadow-lg shadow-[#00000069]`}>
       <CheckBox
+        darkMode={darkMode}
         checkStatus={checkStatus}
         onClick={() => setCheckStatus(!checkStatus)}
       />
@@ -38,7 +42,9 @@ function EnterField({setter, id}) {
       {inputValue && (
         <FaPlus
           onClick={addTask}
-          className="absolute top-1/2 right-2 -translate-y-1/2 text-[1.5em] h-full  mr-5 cursor-pointer  hover:text-customCl"
+          className={`absolute top-1/2 right-2 -translate-y-1/2 text-[1.5em] h-full  mr-5 cursor-pointer  ${
+            darkMode ? "hover:text-textHoverD" : "hover:text-textHoverL"
+          }`}
         />
       )}
     </div>

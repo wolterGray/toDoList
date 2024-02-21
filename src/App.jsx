@@ -8,7 +8,7 @@ import TasksSection from "./components/TasksSection/TasksSection";
 
 function App() {
   const [tasksData, setTasksData] = React.useState([]);
-
+  const [darkMode, setDarkMode] = React.useState(false);
   function removeTask(id) {
     const newTaskArr = tasksData.filter((t) => t.id !== id);
     setTasksData(newTaskArr);
@@ -22,19 +22,26 @@ function App() {
   function clearAllCompleted() {
     setTasksData(tasksData.filter((e) => e.complete === false));
   }
-
+  function darkModeToggle() {
+    setDarkMode(!darkMode);
+  }
   return (
-    <div className="relative select-none">
+    <div
+      className={`${
+        darkMode && "dark:bg-bgDark dark:text-primaryClD"
+      } bg-bgLight text-primaryClL h-screen relative text-[18px]  select-none box-border `}>
       <img
-        className="h-full"
-        src="/bg-desktop-dark.jpg"
+        className="min-h-max object-cover absolute "
+        src={darkMode ? `/bg-desktop-dark.jpg` : `/bg-desktop-light.jpg`}
         alt="background banner"
       />
-      <div className="h-3/5 w-5/12 text-[18px] mx-auto absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-        <Header />
-        <EnterField setter={setTasksData} />
+
+      <div className="container md:max-w-xl sm:max-w-lg mx-auto pt-20 relative z-auto">
+        <Header darkModeToggle={darkModeToggle} darkMode={darkMode} />
+        <EnterField darkMode={darkMode} setter={setTasksData} />
         {tasksData && (
           <TasksSection
+            darkMode={darkMode}
             removeTask={removeTask}
             setCompleteStatus={setCompleteStatus}
             clearAllCompleted={clearAllCompleted}
