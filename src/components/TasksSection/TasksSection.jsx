@@ -40,7 +40,7 @@ function TasksSection({
             </TaskItem>
           ))
         ) : (
-          <p className="h-16  font-[500] flex items-center justify-center border-b-[1px] border-customBorder text-secondaryTextColor ">
+          <p className="sm:h-16 h-14  font-[500] flex items-center justify-center border-b-[1px] border-customBorder text-secondaryTextColor ">
             {activeOption !== "All"
               ? ` No "${activeOption}" tasks.`
               : "No tasks yet..."}
@@ -82,7 +82,7 @@ function TasksSection({
       <div
         className={`${
           darkMode ? "bg-secondaryBgD" : "bg-secondaryBgL"
-        } h-16 flex justify-center mt-4 sm:hidden gap-5 shadow-xl shadow-[#00000049] rounded-md text-secondaryTextColor`}>
+        } sm:h-16 h-14 flex justify-center mt-4 sm:hidden gap-5 shadow-xl shadow-[#00000049] rounded-md text-secondaryTextColor`}>
         {controlsValue.map((element) => (
           <button
             key={element}

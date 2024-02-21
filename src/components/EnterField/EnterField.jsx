@@ -25,7 +25,7 @@ function EnterField({setter, darkMode}) {
     <div
       className={`${
         darkMode ? "bg-secondaryBgD" : "bg-secondaryBgL"
-      } relative h-16 flex items-center rounded-md shadow-lg shadow-[#00000069]`}>
+      } relative sm:h-16 h-14 flex items-center rounded-md shadow-lg shadow-[#00000069]`}>
       <CheckBox
         darkMode={darkMode}
         checkStatus={checkStatus}

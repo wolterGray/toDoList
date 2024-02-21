@@ -16,7 +16,7 @@ function TaskItem({
     <div
       onMouseEnter={() => setCrossVisible(true)}
       onMouseLeave={() => setCrossVisible(false)}
-      className="relative flex items-center border-b-[1px] border-customBorder  h-16">
+      className="relative flex items-center border-b-[1px] border-customBorder  sm:h-16 h-14">
       <CheckBox
         darkMode={darkMode}
         checkStatus={complete}
@@ -31,10 +31,10 @@ function TaskItem({
       </p>
       <RxCross1
         onClick={() => removeTask(id)}
-        className={`${
+        className={`sm:${
           crossVisible ? "opacity-1" : "opacity-0"
         } text-[1.5em]  mr-5 cursor-pointer text-secondaryTextColor  ${
-          darkMode === "dark" ? "hover:text-textHoverD" : "hover:text-textHoverL"
+          darkMode ? "hover:text-textHoverD" : "hover:text-textHoverL"
         }`}
       />
     </div>

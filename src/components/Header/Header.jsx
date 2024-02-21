@@ -3,11 +3,15 @@ import {MdLightMode, MdDarkMode} from "react-icons/md";
 
 function Header({darkModeToggle, darkMode}) {
   return (
-    <header className="text-primaryClD mb-10 flex items-center justify-between w-full">
-      <p href="#" className="font-[700] tracking-[.30em] text-[2.8em]">
+    <header className="text-primaryClD sm:mb-6 mb-4 flex items-center justify-between w-full">
+      <p
+        href="#"
+        className=" font-bold tracking-[.30em] sm:text-[2em] text-[1.5em]">
         TODO
       </p>
-      <div className="text-3xl cursor-pointer" onClick={darkModeToggle}>
+      <div
+        className="sm:text-3xl text-2xl cursor-pointer"
+        onClick={darkModeToggle}>
         {darkMode ? <MdLightMode /> : <MdDarkMode />}
       </div>
     </header>
