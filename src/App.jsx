@@ -10,8 +10,11 @@ import TasksSection from "./components/TasksSection/TasksSection";
 
 function App() {
   const [tasksData, setTasksData] = React.useState([]);
-  const [darkMode, setDarkMode] = React.useState(false);
-
+  const saveTheme = localStorage.getItem("darkMode");
+  const [darkMode, setDarkMode] = React.useState(
+    saveTheme ? JSON.parse(saveTheme) : true
+  );
+  console.log(darkMode);
   function removeTask(id) {
     setTasksData((prev) => {
       const newData = prev.filter((t) => t.id !== id);
@@ -30,6 +33,12 @@ function App() {
   function darkModeToggle() {
     setDarkMode(!darkMode);
   }
+  
+
+  React.useEffect(() => {
+    localStorage.setItem("darkMode", darkMode);
+  }, [darkMode]);
+
   return (
     <div
       className={`${
@@ -37,7 +46,7 @@ function App() {
       } bg-bgLight text-primaryClL h-screen relative text-[18px]  select-none box-border `}>
       <img
         className="sm:h-max h-1/3 object-cover absolute "
-        src={darkMode ? `/bg-desktop-dark.jpg` : `/bg-desktop-light.jpg`}
+        src={darkMode ? `bg-desktop-dark.jpg` : `bg-desktop-light.jpg`}
         alt="background banner"
       />
 
