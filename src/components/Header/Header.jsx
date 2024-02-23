@@ -3,7 +3,7 @@ import {MdLightMode, MdDarkMode} from "react-icons/md";
 
 function Header({darkModeToggle, darkMode}) {
   return (
-    <header className="text-primaryClD sm:mb-6 mb-4 flex items-center justify-between w-full">
+    <header className="text-bgLight sm:mb-6 mb-4 flex items-center justify-between w-full">
       <p
         href="#"
         className=" font-bold tracking-[.30em] sm:text-[2em] text-[1.5em]">

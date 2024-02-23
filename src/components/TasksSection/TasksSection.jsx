@@ -1,4 +1,5 @@
 import React from "react";
+import {AnimatePresence, motion, Reorder} from "framer-motion";
 
 import TaskItem from "../TaskItem/TaskItem";
 
@@ -8,6 +9,7 @@ function TasksSection({
   setCompleteStatus,
   clearAllCompleted,
   removeTask,
+  setTasksData,
 }) {
   const [activeOption, setActiveOption] = React.useState("All");
 
@@ -20,32 +22,49 @@ function TasksSection({
       return tasksData.filter((e) => e.complete === true);
     } else return tasksData;
   }
-
+ 
   return (
-    <>
+    <div>
       <div
         className={`${
           darkMode ? "bg-secondaryBgD" : "bg-secondaryBgL"
-        } sm:mt-6 mt-4  rounded-md shadow-xl  shadow-[#00000049]`}>
-        {filterTasks().length > 0 ? (
-          filterTasks().map((task) => (
-            <TaskItem
-              darkMode={darkMode}
-              setCompleteStatus={setCompleteStatus}
-              id={task.id}
-              complete={task.complete}
-              removeTask={removeTask}
-              key={task.id}>
-              {task.name}
-            </TaskItem>
-          ))
-        ) : (
-          <p className="sm:h-16 h-14  font-[500] flex items-center justify-center border-b-[1px] border-customBorder text-secondaryTextColor ">
-            {activeOption !== "All"
-              ? ` No "${activeOption}" tasks.`
-              : "No tasks yet..."}
-          </p>
-        )}
+        } sm:mt-6 mt-4 rounded-md shadow-xl  shadow-[#00000049]`}>
+        <div>
+          {filterTasks().length > 0 ? (
+            <Reorder.Group
+              as="ol"
+              axis="y"
+              values={tasksData}
+              onReorder={setTasksData}>
+              <AnimatePresence>
+                {filterTasks().map((task) => (
+                  <Reorder.Item
+                    key={task.id}
+                    value={task}
+                    whileDrag={{
+                      scale: 0.9,
+                      boxShadow: "0px 1px 8px rgba(0, 0, 0, 0.4)",
+                    }}>
+                    <TaskItem
+                      darkMode={darkMode}
+                      setCompleteStatus={setCompleteStatus}
+                      id={task.id}
+                      complete={task.complete}
+                      removeTask={removeTask}
+                      name={task.name}
+                    />
+                  </Reorder.Item>
+                ))}
+              </AnimatePresence>
+            </Reorder.Group>
+          ) : (
+            <p className="sm:h-16 h-14  font-[500] flex items-center justify-center border-b-[1px] border-customBorder text-secondaryTextColor ">
+              {activeOption !== "All"
+                ? `No "${activeOption}" tasks.`
+                : "No tasks yet..."}
+            </p>
+          )}
+        </div>
         <div className="h-12 p-5 flex justify-between items-center text-secondaryTextColor text-[.8em] font-bold">
           <div>
             <p>
@@ -53,9 +72,9 @@ function TasksSection({
             </p>
           </div>
           <div className=" hidden sm:flex gap-5">
-            {controlsValue.map((element) => (
+            {controlsValue.map((element, index) => (
               <button
-                key={element}
+                key={index}
                 onClick={() => setActiveOption(element)}
                 className={`${
                   activeOption === element
@@ -79,6 +98,7 @@ function TasksSection({
           </div>
         </div>
       </div>
+
       <div
         className={`${
           darkMode ? "bg-secondaryBgD" : "bg-secondaryBgL"
@@ -98,7 +118,7 @@ function TasksSection({
           </button>
         ))}
       </div>
-    </>
+    </div>
   );
 }
 

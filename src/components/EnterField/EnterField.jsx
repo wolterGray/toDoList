@@ -32,7 +32,7 @@ function EnterField({setter, darkMode}) {
         onClick={() => setCheckStatus(!checkStatus)}
       />
       <input
-        className=" bg-[transparent]  w-full h-full ml-5 placeholder:opacity-[0.7]  mr-0-auto  rounded-md outline-none text-customCl"
+        className=" bg-[transparent]  w-full h-full ml-5 placeholder:text-secondaryTextColor  mr-0-auto  rounded-md outline-none text-customCl"
         placeholder="Create a new todo..."
         onKeyDown={(e) => onPushEnter(e)}
         onChange={(el) => setInputValue(el.target.value)}
