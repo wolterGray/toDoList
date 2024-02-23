@@ -1,7 +1,7 @@
 import React from "react";
 import {RxCross1} from "react-icons/rx";
 import CheckBox from "../checkBox/CheckBox";
-import {AnimatePresence, motion} from "framer-motion";
+import {motion} from "framer-motion";
 
 function TaskItem({
   name,
@@ -16,7 +16,7 @@ function TaskItem({
   return (
     <motion.div
       whileDrag={{
-        opacity:0
+        opacity: 0,
       }}
       initial={{
         opacity: 0,
@@ -34,7 +34,7 @@ function TaskItem({
       }}
       transition={{
         duration: 0.2,
-        delay: 0.2,
+        delay: 0.1,
       }}
       onMouseEnter={() => setCrossVisible(true)}
       onMouseLeave={() => setCrossVisible(false)}

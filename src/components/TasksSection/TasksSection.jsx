@@ -1,5 +1,5 @@
 import React from "react";
-import {AnimatePresence, motion, Reorder} from "framer-motion";
+import {AnimatePresence, Reorder} from "framer-motion";
 
 import TaskItem from "../TaskItem/TaskItem";
 
@@ -15,14 +15,18 @@ function TasksSection({
 
   const [controlsValue] = React.useState(["All", "Active", "Completed"]);
 
+  const hasTasks = filterTasks().length > 0;
+
   function filterTasks() {
     if (activeOption === "Active") {
-      return tasksData.filter((e) => e.complete === false);
+      return tasksData.filter((e) => !e.complete);
     } else if (activeOption === "Completed") {
-      return tasksData.filter((e) => e.complete === true);
-    } else return tasksData;
+      return tasksData.filter((e) => e.complete);
+    } else {
+      return tasksData;
+    }
   }
- 
+
   return (
     <div>
       <div
@@ -30,7 +34,7 @@ function TasksSection({
           darkMode ? "bg-secondaryBgD" : "bg-secondaryBgL"
         } sm:mt-6 mt-4 rounded-md shadow-xl  shadow-[#00000049]`}>
         <div>
-          {filterTasks().length > 0 ? (
+          {hasTasks ? (
             <Reorder.Group
               as="ol"
               axis="y"

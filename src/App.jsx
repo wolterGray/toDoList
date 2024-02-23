@@ -14,16 +14,15 @@ function App() {
   const [darkMode, setDarkMode] = React.useState(
     saveTheme ? JSON.parse(saveTheme) : true
   );
-  console.log(darkMode);
+
   function removeTask(id) {
     setTasksData((prev) => {
-      const newData = prev.filter((t) => t.id !== id);
-      return newData;
+      return prev.filter((t) => t.id !== id);
     });
   }
   function setCompleteStatus(id) {
-    const newTaskArr = tasksData.map((e) =>
-      e.id === id ? {...e, complete: !e.complete} : e
+    const newTaskArr = tasksData.map((task) =>
+      task.id === id ? {...task, complete: !task.complete} : task
     );
     setTasksData(newTaskArr);
   }
@@ -33,7 +32,6 @@ function App() {
   function darkModeToggle() {
     setDarkMode(!darkMode);
   }
-  
 
   React.useEffect(() => {
     localStorage.setItem("darkMode", darkMode);
@@ -42,7 +40,7 @@ function App() {
   return (
     <div
       className={`${
-        darkMode && "dark:bg-bgDark dark:text-primaryClD"
+        darkMode ? "dark:bg-bgDark dark:text-primaryClD" : ""
       } bg-bgLight text-primaryClL h-screen relative text-[18px]  select-none box-border `}>
       <img
         className="sm:h-max h-1/3 object-cover absolute "

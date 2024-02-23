@@ -16,9 +16,7 @@ function EnterField({setter, darkMode}) {
     setCheckStatus(false);
   };
   const onPushEnter = (e) => {
-    if (e.key === "Enter" && inputValue.trim().length) {
-      addTask();
-    }
+    e.key === "Enter" && inputValue.trim().length && addTask();
   };
 
   return (
@@ -32,6 +30,8 @@ function EnterField({setter, darkMode}) {
         onClick={() => setCheckStatus(!checkStatus)}
       />
       <input
+        id="todoInput"
+        aria-label="Enter your task"
         className=" bg-[transparent]  w-full h-full ml-5 placeholder:text-secondaryTextColor  mr-0-auto  rounded-md outline-none text-customCl"
         placeholder="Create a new todo..."
         onKeyDown={(e) => onPushEnter(e)}
