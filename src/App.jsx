@@ -9,8 +9,11 @@ import EnterField from "./components/EnterField/EnterField";
 import TasksSection from "./components/TasksSection/TasksSection";
 
 function App() {
-  const [tasksData, setTasksData] = React.useState([]);
   const saveTheme = localStorage.getItem("darkMode");
+  const saveTasks = localStorage.getItem("tasks");
+  const [tasksData, setTasksData] = React.useState(
+    saveTasks !== null ? JSON.parse(saveTasks) : []
+  );
   const [darkMode, setDarkMode] = React.useState(
     saveTheme ? JSON.parse(saveTheme) : true
   );
@@ -58,7 +61,12 @@ function App() {
             opacity: {duration: 0.6},
             y: {duration: 0.5},
           }}>
-          <EnterField darkMode={darkMode} setter={setTasksData} />
+          <EnterField
+            tasksData={tasksData}
+            saveTasks={saveTasks}
+            darkMode={darkMode}
+            setter={setTasksData}
+          />
           <TasksSection
             darkMode={darkMode}
             removeTask={removeTask}

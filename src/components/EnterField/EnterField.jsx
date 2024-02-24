@@ -3,7 +3,7 @@ import CheckBox from "../checkBox/CheckBox";
 import {FaPlus} from "react-icons/fa6";
 import {v4} from "uuid";
 
-function EnterField({setter, darkMode}) {
+function EnterField({setter, tasksData, darkMode}) {
   const [checkStatus, setCheckStatus] = React.useState(false);
   const [inputValue, setInputValue] = React.useState("");
 
@@ -18,7 +18,9 @@ function EnterField({setter, darkMode}) {
   const onPushEnter = (e) => {
     e.key === "Enter" && inputValue.trim().length && addTask();
   };
-
+  React.useEffect(() => {
+    localStorage.setItem("tasks", JSON.stringify([...tasksData]));
+  }, [tasksData]);
   return (
     <div
       className={`${

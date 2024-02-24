@@ -25,15 +25,15 @@ This is a solution to the [Todo app challenge on Frontend Mentor](https://www.fr
 
 1. Clone the repository:
 
-   git clone https://github.com/wolterGray/toDoList.git
+   		git clone https://github.com/wolterGray/toDoList.git
 
 2. Install dependencies:
 
-   npm install
+   		npm install
 
 3. Run the development server:
 
-   npm run dev
+   		npm run dev
 
 Feel free to contribute or report issues!
 
